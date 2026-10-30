@@ -1,44 +1,8 @@
-const form = document.querySelector("#enquiry-form");
-const service = document.querySelector("#service");
-const formMessage = document.querySelector("#form-message");
 const menuToggle = document.querySelector(".menu-toggle");
 const mainNav = document.querySelector(".main-nav");
-const whatsappNumber = "919664361536";
-
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
-  if (!form.reportValidity()) return;
-
-  const formData = new FormData(form);
-  const message = [
-    "Hello, I would like to enquire about a trip.",
-    `Name: ${formData.get("name")}`,
-    `Phone: ${formData.get("phone")}`,
-    `Service: ${formData.get("service")}`,
-    `Travel date: ${formData.get("date") || "Not specified"}`,
-    `Message: ${formData.get("message") || "None"}`,
-  ].join("\n");
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-  const whatsappLink = document.createElement("a");
-
-  whatsappLink.href = whatsappUrl;
-  whatsappLink.target = "_blank";
-  whatsappLink.rel = "noreferrer";
-  whatsappLink.textContent = "Open WhatsApp";
-
-  formMessage.replaceChildren(
-    document.createTextNode("Your enquiry is ready. WhatsApp should open in a new tab; review the message and tap Send. If it does not open, "),
-    whatsappLink,
-    document.createTextNode("."),
-  );
-  window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-});
-
-document.querySelectorAll("[data-service]").forEach((card) => {
-  card.addEventListener("click", () => {
-    service.value = card.dataset.service;
-  });
-});
+const contacts = document.querySelector(".floating-contacts");
+const contactsToggle = document.querySelector(".floating-contact-toggle");
+const contactList = document.querySelector(".floating-contact-list");
 
 menuToggle.addEventListener("click", () => {
   const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
@@ -53,4 +17,38 @@ mainNav.querySelectorAll("a").forEach((link) => {
     menuToggle.setAttribute("aria-label", "Open navigation");
     mainNav.classList.remove("is-open");
   });
+});
+
+const setContactsOpen = (isOpen) => {
+  contacts.classList.toggle("is-open", isOpen);
+  contactsToggle.setAttribute("aria-expanded", String(isOpen));
+  contactsToggle.setAttribute("aria-label", isOpen ? "Close contact links" : "Open contact links");
+  contactList.setAttribute("aria-hidden", String(!isOpen));
+  contactList.inert = !isOpen;
+};
+
+contactsToggle.addEventListener("click", () => {
+  setContactsOpen(contactsToggle.getAttribute("aria-expanded") !== "true");
+});
+
+contacts.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && contactsToggle.getAttribute("aria-expanded") === "true") {
+    setContactsOpen(false);
+    contactsToggle.focus();
+  }
+});
+
+contactList.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => setContactsOpen(false));
+});
+
+document.querySelectorAll('a[href="#plan"], a[href="#enquiry-form"]').forEach((link) => {
+  const service = link.dataset.service;
+  const message = service
+    ? `Hello, I would like to enquire about ${service}.`
+    : "Hello, I would like to enquire about your travel services.";
+
+  link.href = `https://wa.me/919785364401?text=${encodeURIComponent(message)}`;
+  link.target = "_blank";
+  link.rel = "noreferrer";
 });
