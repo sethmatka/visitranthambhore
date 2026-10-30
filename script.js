@@ -54,33 +54,3 @@ mainNav.querySelectorAll("a").forEach((link) => {
     mainNav.classList.remove("is-open");
   });
 });
-
-document.querySelectorAll(".destination-carousel").forEach((carousel) => {
-  const viewport = carousel.querySelector(".destination-window");
-  const previous = carousel.querySelector('[data-direction="previous"]');
-  const next = carousel.querySelector('[data-direction="next"]');
-
-  const updateButtons = (scrollPosition = viewport.scrollLeft) => {
-    const maxScroll = viewport.scrollWidth - viewport.clientWidth;
-    previous.disabled = scrollPosition <= 1;
-    next.disabled = scrollPosition >= maxScroll - 1;
-  };
-
-  const scroll = (direction) => {
-    const distance = viewport.clientWidth * 0.8;
-    const maxScroll = viewport.scrollWidth - viewport.clientWidth;
-    const target = Math.max(0, Math.min(maxScroll, viewport.scrollLeft + (direction === "next" ? distance : -distance)));
-    viewport.scrollTo({
-      left: target,
-      behavior: "instant",
-    });
-    updateButtons(target);
-  };
-
-  previous.addEventListener("click", () => scroll("previous"));
-  next.addEventListener("click", () => scroll("next"));
-  viewport.addEventListener("scroll", updateButtons, { passive: true });
-  viewport.addEventListener("scrollend", updateButtons);
-  window.addEventListener("resize", updateButtons, { passive: true });
-  updateButtons();
-});

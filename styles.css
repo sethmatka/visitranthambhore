@@ -527,10 +527,7 @@ textarea {
 }
 
 .destination-carousel {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 12px;
+  width: 100%;
 }
 
 .destination-window {
@@ -547,32 +544,6 @@ textarea {
 .destination-track {
   display: flex;
   width: max-content;
-}
-
-.destination-arrow {
-  width: 40px;
-  height: 40px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgb(12 48 40 / 14%);
-  border-radius: 50%;
-  background: #fff;
-  color: var(--deep-green);
-  box-shadow: 0 3px 10px rgb(33 46 39 / 8%);
-  cursor: pointer;
-  font-size: 22px;
-  line-height: 1;
-  transition: background 160ms ease, color 160ms ease, opacity 160ms ease;
-}
-
-.destination-arrow:hover:not(:disabled) {
-  background: var(--deep-green);
-  color: white;
-}
-
-.destination-arrow:disabled {
-  cursor: default;
-  opacity: 0.4;
 }
 
 .destination-group {
@@ -672,6 +643,74 @@ textarea {
 
 .car-option-link:hover {
   color: #c9770b;
+}
+
+.airport-transfer {
+  padding: 21px 5%;
+  background: #e8eee8;
+}
+
+.airport-transfer-content {
+  width: min(1050px, 100%);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  border: 1px solid rgb(12 48 40 / 8%);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 4px 14px rgb(33 46 39 / 6%);
+}
+
+.airport-transfer-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #f3f0e8;
+  color: var(--forest);
+  font-size: 23px;
+}
+
+.airport-transfer-content .eyebrow {
+  margin-bottom: 4px;
+}
+
+.airport-transfer-content h2 {
+  margin: 0;
+  color: var(--deep-green);
+  font-family: var(--serif);
+  font-size: clamp(18px, 2.2vw, 23px);
+}
+
+.airport-transfer-content > div > p:last-child {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.airport-transfer-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 11px 16px;
+  border-radius: 22px;
+  background: var(--deep-green);
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.airport-transfer-button:hover {
+  transform: translateY(-2px);
+  background: var(--forest);
 }
 
 .plan-section {
@@ -1110,6 +1149,15 @@ textarea {
     margin-left: 11px;
   }
 
+  .airport-transfer-content {
+    gap: 12px;
+    padding: 18px;
+  }
+
+  .airport-transfer-button {
+    padding: 10px 12px;
+  }
+
   .plan-section {
     grid-template-columns: 1fr 1.2fr;
   }
@@ -1321,15 +1369,6 @@ textarea {
     grid-template-rows: 108px auto auto;
   }
 
-  .destination-carousel {
-    gap: 7px;
-  }
-
-  .destination-arrow {
-    width: 34px;
-    height: 34px;
-  }
-
   .available-cars {
     padding-top: 39px;
     padding-bottom: 42px;
@@ -1346,6 +1385,35 @@ textarea {
 
   .car-option img {
     height: 120px;
+  }
+
+  .airport-transfer {
+    padding: 17px 5%;
+  }
+
+  .airport-transfer-content {
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .airport-transfer-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .airport-transfer-content h2 {
+    font-size: 19px;
+  }
+
+  .airport-transfer-content > div > p:last-child {
+    font-size: 10px;
+  }
+
+  .airport-transfer-button {
+    grid-column: 2;
+    justify-self: start;
   }
 
   .plan-section {
