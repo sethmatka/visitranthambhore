@@ -509,77 +509,169 @@ textarea {
 }
 
 .destinations {
-  min-height: 230px;
-  position: relative;
-  display: grid;
-  align-items: center;
   overflow: hidden;
-  padding: 25px max(5%, calc((100% - 1240px) / 2));
+  padding: 42px max(5%, calc((100% - 1240px) / 2));
   background: #e8eee8;
 }
 
-.destination-backdrop {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgb(239 244 237 / 18%), #edf2eb 31%, #edf2eb 100%),
-    url("https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=1000&q=85") left center / auto 100% no-repeat;
+.destinations--jaipur {
+  background: #f5f0e5;
 }
 
 .destination-content {
   width: 100%;
-  position: relative;
-  z-index: 1;
-  margin-left: auto;
 }
 
-.destination-content .section-title {
-  margin-bottom: 16px;
+.destinations .section-title {
+  margin-bottom: 21px;
 }
 
-.destination-content .section-title h2 {
-  font-size: 27px;
-}
-
-.destination-grid {
+.destination-carousel {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 11px;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.destination-window {
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+}
+
+.destination-window::-webkit-scrollbar {
+  display: none;
+}
+
+.destination-track {
+  display: flex;
+  width: max-content;
+}
+
+.destination-arrow {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgb(12 48 40 / 14%);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--deep-green);
+  box-shadow: 0 3px 10px rgb(33 46 39 / 8%);
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  transition: background 160ms ease, color 160ms ease, opacity 160ms ease;
+}
+
+.destination-arrow:hover:not(:disabled) {
+  background: var(--deep-green);
+  color: white;
+}
+
+.destination-arrow:disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.destination-group {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  padding-right: 14px;
 }
 
 .destination-card {
-  min-width: 0;
+  width: clamp(175px, 20vw, 220px);
+  flex: 0 0 auto;
   overflow: hidden;
   display: grid;
-  grid-template-rows: 76px auto auto;
-  padding-bottom: 7px;
+  grid-template-rows: 126px auto auto;
+  padding-bottom: 9px;
   border: 1px solid rgb(255 255 255 / 85%);
-  border-radius: 5px;
+  border-radius: 7px;
   background: white;
-  box-shadow: 0 3px 10px rgb(33 46 39 / 8%);
+  box-shadow: 0 4px 13px rgb(33 46 39 / 9%);
   text-align: center;
-  transition: transform 180ms ease;
+  transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
 .destination-card:hover {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgb(33 46 39 / 14%);
 }
 
 .destination-card img {
   width: 100%;
-  height: 76px;
+  height: 126px;
   display: block;
   object-fit: cover;
 }
 
 .destination-card strong {
-  margin: 7px 4px 1px;
+  margin: 9px 7px 3px;
   color: var(--deep-green);
-  font-size: 9px;
+  font-size: 11px;
+  line-height: 1.35;
 }
 
 .destination-card span {
   color: var(--muted);
-  font-size: 8px;
+  font-size: 9px;
+}
+
+.available-cars {
+  padding-top: 50px;
+  padding-bottom: 54px;
+}
+
+.car-options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.car-option {
+  min-width: 0;
+  overflow: hidden;
+  padding: 0 0 18px;
+  border: 1px solid #ece9df;
+  border-radius: 7px;
+  background: #fff;
+  box-shadow: 0 5px 15px rgb(33 46 39 / 6%);
+}
+
+.car-option img {
+  width: 100%;
+  height: 112px;
+  display: block;
+  object-fit: cover;
+}
+
+.car-option h3 {
+  min-height: 48px;
+  display: grid;
+  align-items: center;
+  margin: 0;
+  padding: 9px 14px 5px;
+  color: var(--deep-green);
+  font-family: var(--serif);
+  font-size: 18px;
+}
+
+.car-option-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 7px 14px 0;
+  color: var(--forest);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.car-option-link:hover {
+  color: #c9770b;
 }
 
 .plan-section {
@@ -886,6 +978,72 @@ textarea {
   font-size: 8px;
 }
 
+.floating-contacts {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.floating-contact {
+  width: 50px;
+  height: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  border-radius: 50%;
+  color: white;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 22%);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.floating-contact:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 18px rgb(0 0 0 / 26%);
+}
+
+.floating-contact--call {
+  background: #16834b;
+}
+
+.floating-contact--instagram {
+  background: radial-gradient(circle at 30% 110%, #feda75 0 18%, #fa7e1e 40%, #d62976 65%, #962fbf 82%, #4f5bd5 100%);
+}
+
+.floating-contact svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.floating-contact--call svg {
+  width: 20px;
+  height: 20px;
+}
+
+.floating-contact--call span {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+.instagram-dot {
+  fill: currentColor;
+  stroke: none;
+}
+
 @keyframes rise-in {
   from {
     opacity: 0;
@@ -924,17 +1082,32 @@ textarea {
     font-size: 10px;
   }
 
-  .service-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .destination-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .destinations {
-    padding-top: 34px;
-    padding-bottom: 34px;
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+
+  .car-options {
+    gap: 12px;
+  }
+
+  .car-option {
+    padding-bottom: 15px;
+  }
+
+  .car-option img {
+    height: 100px;
+  }
+
+  .car-option h3 {
+    padding-right: 11px;
+    padding-left: 11px;
+    font-size: 17px;
+  }
+
+  .car-option-link {
+    margin-right: 11px;
+    margin-left: 11px;
   }
 
   .plan-section {
@@ -1127,11 +1300,6 @@ textarea {
     width: 90%;
   }
 
-  .services {
-    padding-top: 39px;
-    padding-bottom: 39px;
-  }
-
   .section-title {
     margin-bottom: 19px;
   }
@@ -1140,40 +1308,44 @@ textarea {
     font-size: 25px;
   }
 
-  .service-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 11px;
-  }
-
-  .service-card > img {
-    height: 105px;
-  }
-
-  .service-card p {
-    min-height: 45px;
-    margin-right: 8px;
-    margin-left: 8px;
-  }
-
-  .destination-backdrop {
-    background: linear-gradient(90deg, rgb(239 244 237 / 40%), #edf2eb 45%, #edf2eb 100%),
-      url("https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=800&q=80") left center / auto 100% no-repeat;
-  }
-
-  .destination-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .destination-content .section-title h2 {
+  .destinations .section-title h2 {
     font-size: 24px;
   }
 
-  .destination-card {
-    grid-template-rows: 90px auto auto;
+  .destination-card img {
+    height: 108px;
   }
 
-  .destination-card img {
-    height: 90px;
+  .destination-card {
+    width: 178px;
+    grid-template-rows: 108px auto auto;
+  }
+
+  .destination-carousel {
+    gap: 7px;
+  }
+
+  .destination-arrow {
+    width: 34px;
+    height: 34px;
+  }
+
+  .available-cars {
+    padding-top: 39px;
+    padding-bottom: 42px;
+  }
+
+  .car-options {
+    grid-template-columns: 1fr;
+    gap: 11px;
+  }
+
+  .car-option {
+    padding-bottom: 14px;
+  }
+
+  .car-option img {
+    height: 120px;
   }
 
   .plan-section {
@@ -1214,6 +1386,17 @@ textarea {
     gap: 5px;
     padding: 10px 5%;
     line-height: 1.5;
+  }
+
+  .floating-contacts {
+    right: 14px;
+    bottom: 14px;
+    gap: 8px;
+  }
+
+  .floating-contact {
+    width: 45px;
+    height: 45px;
   }
 }
 
