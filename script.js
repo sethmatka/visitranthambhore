@@ -1,27 +1,42 @@
-const form = document.querySelector("#trip-form");
-const experience = document.querySelector("#experience");
-const season = document.querySelector("#season");
+const form = document.querySelector("#enquiry-form");
+const service = document.querySelector("#service");
 const formMessage = document.querySelector("#form-message");
 const menuToggle = document.querySelector(".menu-toggle");
 const mainNav = document.querySelector(".main-nav");
+const whatsappNumber = "919664361536";
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   if (!form.reportValidity()) return;
 
-  const interest = experience.value.toLowerCase();
-  const timing = season.value;
-  const safariTip =
-    experience.value === "Wildlife safari"
-      ? " Reserve a safari permit through an authorized booking channel."
-      : "";
+  const formData = new FormData(form);
+  const message = [
+    "Hello, I would like to enquire about a trip.",
+    `Name: ${formData.get("name")}`,
+    `Phone: ${formData.get("phone")}`,
+    `Service: ${formData.get("service")}`,
+    `Travel date: ${formData.get("date") || "Not specified"}`,
+    `Message: ${formData.get("message") || "None"}`,
+  ].join("\n");
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  const whatsappLink = document.createElement("a");
 
-  formMessage.textContent = `A good starting point: plan for ${timing}, with a focus on ${interest}.${safariTip} Check current park access and opening updates before you travel.`;
+  whatsappLink.href = whatsappUrl;
+  whatsappLink.target = "_blank";
+  whatsappLink.rel = "noreferrer";
+  whatsappLink.textContent = "Open WhatsApp";
+
+  formMessage.replaceChildren(
+    document.createTextNode("Your enquiry is ready. WhatsApp should open in a new tab; review the message and tap Send. If it does not open, "),
+    whatsappLink,
+    document.createTextNode("."),
+  );
+  window.open(whatsappUrl, "_blank", "noopener,noreferrer");
 });
 
-document.querySelectorAll(".experience-card").forEach((card) => {
+document.querySelectorAll("[data-service]").forEach((card) => {
   card.addEventListener("click", () => {
-    experience.value = card.dataset.experience;
+    service.value = card.dataset.service;
   });
 });
 
